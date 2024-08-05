@@ -77,12 +77,11 @@ def gpt_chat():
     )
 
 
-OPENAI_KEY = ""
 
 @openai_controller.route('/api/v0/langchain', methods=(['GET']))
 def lang_chain_simple_example():
 
-    llm = ChatOpenAI(api_key=OPENAI_KEY)
+    llm = ChatOpenAI(api_key="")
 
     prompt_template = ChatPromptTemplate.from_messages([
         ("system", "You are a world class technical documentation writer."),
