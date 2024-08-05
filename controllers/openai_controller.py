@@ -77,7 +77,7 @@ def gpt_chat():
     )
 
 
-OPENAI_KEY = "OPEN-AI-KEY"
+OPENAI_KEY = ""
 
 @openai_controller.route('/api/v0/langchain', methods=(['GET']))
 def lang_chain_simple_example():
@@ -108,7 +108,7 @@ def lang_chain_simple_example():
 @openai_controller.route('/api/v0/vector-store', methods=(['GET']))
 def vector_store_simple_example():
 
-    pc = Pinecone(api_key="PINECONE-KEY")
+    pc = Pinecone(api_key="")
     index = pc.Index("huggingface-multilingual-e5-large")
 
     index.upsert(
