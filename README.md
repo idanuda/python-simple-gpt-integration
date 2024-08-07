@@ -1,4 +1,4 @@
-# python-general-purpose
+# python-simple-gpt-integration
 Simple python flask service with OpenAI GPT Integration.
 
 
