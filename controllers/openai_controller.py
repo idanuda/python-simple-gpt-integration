@@ -6,7 +6,7 @@ import requests
 
 
 openai_controller = Blueprint('openai_controller', __name__, template_folder='templates')
-ENDPOINT = "YOUR-ENDPOINT"
+ENDPOINT = "YOUR-ENDPOINT "
 API_KEY = "YOUR-API-KEY"
 
 @openai_controller.route('/api/v0/openai/gpt-4', methods=(['POST']))
