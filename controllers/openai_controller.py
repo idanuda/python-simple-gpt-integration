@@ -11,12 +11,14 @@ import requests
 
 
 openai_controller = Blueprint('openai_controller', __name__, template_folder='templates')
+ENDPOINT = "YOUR-ENDPOINT"
+API_KEY = "YOU-API-KEY"
 
 @openai_controller.route('/api/v0/openai/gpt-4', methods=(['POST']))
 def gpt_chat():
 
     # Configuration
-    API_KEY = "c04d1399cc7c462d94343a2a8ac67df9"
+
     headers = {
         "Content-Type": "application/json",
         "api-key": API_KEY,
@@ -58,7 +60,7 @@ def gpt_chat():
         "max_tokens": 800
     }
 
-    ENDPOINT = "https://idan-test-west-europe-01.openai.azure.com/openai/deployments/gpt-4o-global-128k/chat/completions?api-version=2024-02-15-preview"
+
 
     # Send request
     try:
@@ -75,8 +77,6 @@ def gpt_chat():
         response.json(),
         200
     )
-
-
 
 @openai_controller.route('/api/v0/langchain', methods=(['GET']))
 def lang_chain_simple_example():
@@ -95,45 +95,6 @@ def lang_chain_simple_example():
     request_question = request.get_json().get('request_question')
 
     gpt_response = chain.invoke({"input": request_question})
-
-    return make_response(
-        {'gpt_response': gpt_response},
-        200
-    )
-
-
-
-
-@openai_controller.route('/api/v0/vector-store', methods=(['GET']))
-def vector_store_simple_example():
-
-    pc = Pinecone(api_key="")
-    index = pc.Index("huggingface-multilingual-e5-large")
-
-    index.upsert(
-        vectors=[
-            {
-                "id": "vec1",
-                "values": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
-                "metadata": {"genre": "drama"}
-            }, {
-                "id": "vec2",
-                "values": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
-                "metadata": {"genre": "action"}
-            }, {
-                "id": "vec3",
-                "values": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
-                "metadata": {"genre": "drama"}
-            }, {
-                "id": "vec4",
-                "values": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
-                "metadata": {"genre": "action"}
-            }
-        ],
-        namespace="ns1"
-    )
-
-    gpt_response = {"input": ["some data"]}
 
     return make_response(
         {'gpt_response': gpt_response},
